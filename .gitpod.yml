@@ -1,15 +1,20 @@
+image:
+  file: .gitpod.Dockerfile
+
 tasks:
-  - name: Install Flutter
+  - name: Setup Flutter
     init: |
-      sudo apt-get update
-      sudo apt-get install -y git curl unzip xz-utils zip libglu1-mesa
-      git clone https://github.com/flutter/flutter.git -b stable $HOME/flutter
-      echo 'export PATH="$PATH:$HOME/flutter/bin"' >> ~/.bashrc
-      source ~/.bashrc
-      flutter --version
-    command: |
+      git config --global --add safe.directory /workspace/hoshyarapp
       flutter doctor
+      flutter pub get
+    command: |
+      echo "✅ محیط آماده شد! برای بیلد: flutter build apk"
+
+ports:
+  - port: 8080
+    onOpen: ignore
 
 vscode:
   extensions:
     - Dart-Code.flutter
+    - Dart-Code.dart-code
